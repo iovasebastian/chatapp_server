@@ -1,11 +1,18 @@
 {
     "functions": {
-      "/*.php": {
+      "*.php": {
         "runtime": "vercel-php@0.5.2"
       }
     },
     "routes": [
-      { "src": "/index.php",  "dest": "/index.php" },
+      { "src": "/index.php", "dest": "/index.php" },
       { "src": "/addfriends.php", "dest": "/addfriends.php" },
-      { "src": "/js/script.js", "dest": "/js/script.j" }]
+      { "src": "/deletefriendship.php", "dest": "/deletefriendship.php" },
+      { "src": "/getfriends.php", "dest": "/getfriends.php" },
+      { "src": "/getmessages.php", "dest": "/getmessages.php" },
+      { "src": "/sendmessage.php", "dest": "/sendmessage.php" },
+      { "src": "/register.php", "dest": "/register.php" },
+      { "src": "/js/script.js", "dest": "/js/script.js" }
+    ]
   }
+  
