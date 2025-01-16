@@ -1,5 +1,5 @@
 <?php
-$dbPath = './chatappDB.sqlite'; // Path to your SQLite database
+$dbPath = './chatappDB.sqlite';
 
 if (file_exists($dbPath)) {
     header('Content-Type: application/octet-stream');

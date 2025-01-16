@@ -7,22 +7,21 @@ if ($data && isset($data['chatId'])) {
     $chatId = $data['chatId'];
 
     $stmt = $db->prepare("SELECT chatId, senderId, body, sent_at FROM messages WHERE chatId = :chatId");
-    $stmt->bindValue(':chatId', $chatId, SQLITE3_INTEGER); // Use INTEGER for chatId
+    $stmt->bindValue(':chatId', $chatId, SQLITE3_INTEGER);
     $result = $stmt->execute();
 
-    $messages = []; // Initialize an array to store all messages
+    $messages = []; 
 
-    while ($row = $result->fetchArray(SQLITE3_ASSOC)) { // Loop through all messages
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
         $messages[] = $row;
     }
 
     echo json_encode([
         "status" => "success",
         "message" => "Messages retrieved successfully.",
-        "messages" => $messages // Correct key: "messages"
+        "messages" => $messages 
     ]);
 } else {
-    // Handle empty or invalid input
     echo json_encode([
         "status" => "error",
         "message" => "Invalid input or missing chatId."

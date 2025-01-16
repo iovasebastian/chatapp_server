@@ -6,7 +6,6 @@ $data = json_decode(file_get_contents("php://input"), true);
 if ($data) {
     $userId = $data['userId'];
 
-    // Query to fetch friendships where the user is either userId or friendId
     $stmt = $db->prepare("
         SELECT 
             friendship_id,
@@ -20,9 +19,9 @@ if ($data) {
     $stmt->bindValue(':userId', $userId, SQLITE3_TEXT);
     $result = $stmt->execute();
 
-    $friends = []; // Initialize an array to store all friends
+    $friends = [];
 
-    while ($row = $result->fetchArray(SQLITE3_ASSOC)) { // Loop through all friendships
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
         $friendId = $row['friendId'];
         $friendshipId = $row['friendship_id'];
 
@@ -33,16 +32,16 @@ if ($data) {
         $friendInfo = $resultFriend->fetchArray(SQLITE3_ASSOC);
 
         if ($friendInfo) {
-            $friendInfo['friendship_id'] = $friendshipId; // Add the friendship ID
-            $friends[] = $friendInfo; // Add the friend's info to the array
+            $friendInfo['friendship_id'] = $friendshipId;
+            $friends[] = $friendInfo;
         }
     }
 
-    if (!empty($friends)) { // Check if any friends were found
+    if (!empty($friends)) {
         echo json_encode([
             "status" => "success",
             "message" => "Friends retrieved successfully.",
-            "friends" => $friends // Return the array of friends
+            "friends" => $friends 
         ]);
     } else {
         echo json_encode([
